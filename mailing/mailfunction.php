@@ -1,3 +1,4 @@
+
 <?php
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -47,4 +48,3 @@ function mailfunction($mail_reciever_email, $mail_reciever_name, $mail_msg, $att
     } else {
         return true;
     }
-}
