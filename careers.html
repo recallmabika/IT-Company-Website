@@ -1,172 +1,381 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IT Company Website</title>
-    <link rel="stylesheet" href="./css/careers.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="icon" href="./images/image.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-    <script src="./js/main.js"></script>
-</head>
-<body>
-    <header class="header">
-        <a href="#" class="logo"><img src="./images/image.png" alt=""></a>
-        <div class="fas fa-bars"></div>
-        <nav class="navbar">
-            <ul>
-                <li><a href="index.html#home">home</a></li>
-                <li><a href="index.html#about">about</a></li>
-                <li><a href="index.html#service">services</a></li>
-                <li><a href="index.html#portfolio">portfolio</a></li>
-                <li><a href="index.html#team">team</a></li>
-                <li><a href="careers.html">career</a></li>
-                <li><a href="index.html#contact">contact</a></li>
-                <li><a href="index.html#faq">FAQ</a></li>
-            </ul>
-        </nav>
-    </header>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IT Company Website - Careers</title>
 
+  <link rel="icon" href="./images/image.png" />
+
+  <!-- Fonts / Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+
+  <!-- Your page CSS -->
+  <link rel="stylesheet" href="./css/careers.css">
+
+  <!-- (Optional) if you use these libs on other pages -->
+  <link rel="stylesheet" href="lib/owlcarousel/assets/owl.carousel.min.css">
+  <link rel="stylesheet" href="lib/lightbox/css/lightbox.min.css">
+
+  <!-- Better: avoid loading scripts in <head> unless needed -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <style>
+    /* Minimal structural fixes without touching your careers.css */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+
+    .navbar ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Mobile: stacked menu */
+    @media (max-width: 991.98px) {
+      .navbar {
+        display: none;
+        width: 100%;
+      }
+      .header.nav-toggle .navbar {
+        display: block;
+        padding-top: 10px;
+      }
+      .navbar ul {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .fa-bars {
+        cursor: pointer;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ====== Header / Navigation ====== -->
+  <header class="header">
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-between py-3">
+        <a class="logo" href="index.html" aria-label="Home">
+          <img src="./images/image.png" alt="IT Company Logo" style="height:48px;width:auto;">
+        </a>
+
+        <!-- Mobile menu button -->
+        <button type="button" class="btn btn-link p-0 d-lg-none fa fa-bars fa-bars text-dark"
+          aria-label="Open navigation"
+          aria-expanded="false">
+        </button>
+
+        <!-- Desktop nav -->
+        <nav class="navbar d-none d-lg-block" aria-label="Main navigation">
+          <ul>
+            <!-- Same-page anchors (if your index has these sections) -->
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#service">Services</a></li>
+            <li><a href="index.html#portfolio">Portfolio</a></li>
+            <li><a href="index.html#team">Team</a></li>
+
+            <!-- Standalone pages (ADD them when ready) -->
+            <li><a href="careers.html" aria-current="page">Careers</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Mobile nav content (shown via .nav-toggle) -->
+      <nav class="navbar d-lg-none mt-2" aria-label="Main navigation mobile">
+        <ul>
+          <li><a href="index.html#home">Home</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#service">Services</a></li>
+          <li><a href="index.html#portfolio">Portfolio</a></li>
+          <li><a href="index.html#team">Team</a></li>
+          <li><a href="careers.html" aria-current="page">Careers</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ====== Main Layout ====== -->
+  <main>
+
+    <!-- Page hero -->
     <section id="home" class="home">
-        <h2>Home / Careers</h2>
+      <div class="container py-4 py-lg-5">
+        <h2 class="mb-2">Home / Careers</h2>
+        <p class="text-muted mb-0">Join our team and build solutions with us.</p>
+      </div>
     </section>
 
     <section id="career-heading" class="career-heading">
+      <div class="container">
         <h1 class="heading">Career</h1>
-        <p>Job Opening in IT Company. Apply Now!</p>
+        <p>Job Openings in IT Company. Apply Now!</p>
+      </div>
     </section>
-    <div class="career">
+
+    <!-- Career form section -->
+    <section class="career">
+      <div class="container">
         <div class="career-form">
-            <form action="./careers.php" method="POST" enctype="multipart/form-data">
-                <input type="text" name="name" placeholder="Name" class="career-form-txt" required>
-                <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required placeholder="Contact number" maxlength="10" class="career-form-phone">
-                <input type="email" name="email" placeholder="Email" class="career-form-email" required>
-                <div class="radio-class">
-                    <h2 class="name">Apply For Which Post?</h2>
-                <label class="radio">
-                  <input class="radio-one" type="radio" checked="checked" name="status" value="Web Designer">
-                  <span class="checkmark"></span>
-                  Web Designer
-                </label>
-                <label class="radio">
-                  <input class="radio-two" type="radio" name="status" value="Web Developer">
-                  <span class="checkmark"></span>
-                  Web Developer
-                </label>
-                <label class="radio">
-                  <input class="radio-three" type="radio" name="status" value="Mobile App Designer">
-                  <span class="checkmark"></span>
-                  Mobile App Designer
-                </label>
-                <label class="radio">
-                    <input class="radio-four" type="radio" name="status" value="Mobile App Developer">
-                    <span class="checkmark"></span>
-                    Mobile App Developer
-                  </label>
-                <label class="radio">
-                  <input class="radio-five" type="radio"  name="status" value="Digital Marketer">
-                  <span class="checkmark"></span>
-                  Digital Marketer
-                </label>
-                </div>
-                <input type="number" id="experience" name="experience" required placeholder="Years of Experience" class="career-form-experience">
-                <textarea placeholder="Other Details" name="details" class="career-form-txtarea" required></textarea>
-                <div class="file">
-                    <h2 class="name">Upload Your Resume</h2>
-                    <input class="upload" type="file" name="fileToUpload" accept=".doc,.docx,.pdf"><br><br><br>
-                </div>
-                <input type="submit" value="Submit" name="submit" class="career-form-btn">
+          <form action="./careers.php" method="POST" enctype="multipart/form-data" class="mt-3">
+            <div class="row">
+              <div class="col-12 col-md-6">
+                <input type="text" name="name" placeholder="Name" class="career-form-txt form-control" required>
+              </div>
+
+              <div class="col-12 col-md-6">
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  pattern="[0-9]{10}"
+                  maxlength="10"
+                  placeholder="Contact number"
+                  class="career-form-phone form-control"
+                  required
+                >
+              </div>
+
+              <div class="col-12 col-md-12">
+                <input type="email" name="email" placeholder="Email" class="career-form-email form-control" required>
+              </div>
+            </div>
+
+            <div class="radio-class mt-4">
+              <h2 class="name">Apply For Which Post?</h2>
+
+              <label class="radio mr-3">
+                <input class="radio-one" type="radio" checked name="status" value="Web Designer">
+                <span class="checkmark"></span> Web Designer
+              </label>
+
+              <label class="radio mr-3">
+                <input class="radio-two" type="radio" name="status" value="Web Developer">
+                <span class="checkmark"></span> Web Developer
+              </label>
+
+              <label class="radio mr-3">
+                <input class="radio-three" type="radio" name="status" value="Mobile App Designer">
+                <span class="checkmark"></span> Mobile App Designer
+              </label>
+
+              <label class="radio mr-3">
+                <input class="radio-four" type="radio" name="status" value="Mobile App Developer">
+                <span class="checkmark"></span> Mobile App Developer
+              </label>
+
+              <label class="radio mt-2 mr-3">
+                <input class="radio-five" type="radio" name="status" value="Digital Marketer">
+                <span class="checkmark"></span> Digital Marketer
+              </label>
+            </div>
+
+            <div class="row mt-4">
+              <div class="col-12 col-md-6">
+                <input type="number" id="experience" name="experience" required placeholder="Years of Experience"
+                  class="career-form-experience form-control">
+              </div>
+              <div class="col-12 col-md-6">
+                <input type="file" name="fileToUpload" accept=".doc,.docx,.pdf"
+                  class="form-control-file">
+              </div>
+            </div>
+
+            <textarea placeholder="Other Details" name="details" class="career-form-txtarea form-control mt-3" required></textarea>
+
+            <div class="mt-3 d-flex">
+              <input type="submit" value="Submit" name="submit" class="career-form-btn btn btn-primary">
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ====== Footer ====== -->
+  <footer class="footer mt-5">
+    <div class="footer-top py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-6 footer-links mb-4">
+            <h4>About Us</h4>
+            <ul>
+              <li><i class="ion-ios-arrow-forward"></i> <a href="index.html#home">Home</a></li>
+              <li><i class="ion-ios-arrow-forward"></i> <a href="index.html#about">About us</a></li>
+              <li><i class="ion-ios-arrow-forward"></i> <a href="index.html#service">Our services</a></li>
+              <li><i class="ion-ios-arrow-forward"></i> <a href="terms.html">Terms & condition</a></li>
+              <li><i class="ion-ios-arrow-forward"></i> <a href="privacy.html">Privacy policy</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links mb-4">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="ion-ios-arrow-forward"></i> <a href="index.html#portfolio">Portfolio</a></li>
+              <li><i class="ion-ios-arrow-forward"></i> <a href="index.html#team">Team</a></li>
+              <li><i class="ion-ios-arrow-forward"></i> <a href="careers.html">Career</a></li>
+              <li><i class="ion-ios-arrow-forward"></i> <a href="contact.html">Contact</a></li>
+              <li><i class="ion-ios-arrow-forward"></i> <a href="faq.html">FAQ</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-contact mb-4">
+            <h4>Contact Us</h4>
+            <p style="font-size: 1.05rem;">
+              1300 Center Avenue<br>
+              Fresno, California<br>
+              United States<br>
+              <strong>Phone:</strong> +123-456-7890<br>
+              <strong>Email:</strong> info@example.com<br>
+            </p>
+
+            <div class="social-links">
+              <a href="https://www.facebook.com/" aria-label="Facebook"><i class="ion-logo-facebook"></i></a>
+              <a href="https://twitter.com/login?lang=en" aria-label="Twitter"><i class="ion-logo-twitter"></i></a>
+              <a href="https://www.linkedin.com/" aria-label="LinkedIn"><i class="ion-logo-linkedin"></i></a>
+              <a href="https://www.instagram.com/" aria-label="Instagram"><i class="ion-logo-instagram"></i></a>
+              <a href="#" aria-label="Google Plus"><i class="ion-logo-googleplus"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-newsletter">
+            <h4>Subscription</h4>
+            <p>
+              Subscribe for our latest updates and new job opportunities.
+            </p>
+            <form action="" method="post" class="d-flex flex-column flex-sm-row">
+              <input type="email" name="email" class="form-control mb-2 mb-sm-0" placeholder="Email" required>
+              <button type="submit" class="btn btn-primary ml-sm-2">Subscribe</button>
             </form>
+          </div>
         </div>
+      </div>
     </div>
 
-      <div class="footer">
-        <div class="footer-top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 footer-links">
-                        <h4>About Us</h4>
-                        <ul>
-                            <li><i class="ion-ios-arrow-forward"></i> <a href="index.html#home">Home</a></li>
-                            <li><i class="ion-ios-arrow-forward"></i> <a href="index.html#about">About us</a></li>
-                            <li><i class="ion-ios-arrow-forward"></i> <a href="index.html#service">Our services</a></li>
-                            <li><i class="ion-ios-arrow-forward"></i> <a href="index.html#home">Terms & condition</a></li>
-                            <li><i class="ion-ios-arrow-forward"></i> <a href="index.html#home">Privacy policy</a></li>
-                        </ul>
-                    </div>
-  
-                    <div class="col-lg-3 col-md-6 footer-links">
-                        <h4>Useful Links</h4>
-                        <ul>
-                            <li><i class="ion-ios-arrow-forward"></i> <a href="index.html#portfolio">Portfolio</a></li>
-                            <li><i class="ion-ios-arrow-forward"></i> <a href="index.html#team">Team</a></li>
-                            <li><i class="ion-ios-arrow-forward"></i> <a href="careers.html">Career</a></li>
-                            <li><i class="ion-ios-arrow-forward"></i> <a href="index.html#contact">Contact</a></li>
-                            <li><i class="ion-ios-arrow-forward"></i> <a href="index.html#faq">FAQ</a></li>
-                        </ul>
-                    </div>
-  
-                    <div class="col-lg-3 col-md-6 footer-contact" style="font-size: 1.5rem;">
-                        <h4>Contact Us</h4>
-                        <p>
-                            1300  Center Avenue<br>
-                            Fresno, California<br>
-                            United States <br>
-                            <strong>Phone:</strong> +123-456-7890<br>
-                            <strong>Email:</strong> info@example.com<br>
-                        </p>
-  
-                        <div class="social-links">
-                            <a href="https://www.facebook.com/"><i class="ion-logo-facebook"></i></a>
-                            <a href="https://twitter.com/login?lang=en"><i class="ion-logo-twitter"></i></a>
-                            <a href="https://www.linkedin.com/"><i class="ion-logo-linkedin"></i></a>
-                            <a href="https://www.instagram.com/"><i class="ion-logo-instagram"></i></a>
-                            <a href="https://accounts.google.com/servicelogin/signinchooser?flowName=GlifWebSignIn&flowEntry=ServiceLogin"><i class="ion-logo-googleplus"></i></a>
-                        </div>
-  
-                    </div>
-  
-                    <div class="col-lg-3 col-md-6 footer-newsletter">
-                        <h4>Subscription</h4>
-                        <p>With Our Skills Put Together, You Get An Ensemble Capable Of Doing Anything And Everything Your Brand Needs. Subscribe Here To Get Our Latest Updates.</p>
-                        <form action="" method="post">
-                            <input type="email" name="email"><input type="submit"  value="Subscribe">
-                        </form>
-                    </div>
-  
-                </div>
-            </div>
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-12 copyright text-center text-white py-3" style="font-size: 1.05rem;">
+          Copyright &copy; 2021 IT Company Website. All Rights Reserved.
         </div>
-  
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6 copyright" style="color: #fff; font-size: 1.3rem;">
-                    Copyright &copy; 2021 IT Company Website. All Rights Reserved.
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+  </footer>
 
-    <a href="#" class="back-to-top"><i class="ion-ios-arrow-up"></i></a>
+  <a href="#" class="back-to-top" aria-label="Back to top">
+    <i class="ion-ios-arrow-up"></i>
+  </a>
 
-    <script src="lib/jquery/jquery.min.js"></script>
-    <script src="lib/jquery/jquery-migrate.min.js"></script>
-    <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/counterup/counterup.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/lightbox/js/lightbox.min.js"></script>
+  <!-- ====== JS dependencies ====== -->
+  <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="lib/easing/easing.min.js"></script>
+  <script src="lib/waypoints/waypoints.min.js"></script>
+  <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+  <script src="lib/lightbox/js/lightbox.min.js"></script>
+
+  <!-- Your page scripts (or you can merge into main.js) -->
+  <script>
+    $(document).ready(function () {
+      "use strict";
+
+      const $window = $(window);
+      const $header = $("header.header");
+      const $nav = $header.find(".navbar").first(); // desktop/mobile parent control
+      const $toggleBtn = $header.find(".fa-bars");
+
+      // ===== Mobile menu toggle =====
+      $toggleBtn.on("click", function () {
+        const expanded = $(this).attr("aria-expanded") === "true";
+        $(this).attr("aria-expanded", String(!expanded));
+
+        // Use a class on the header to control mobile menu visibility
+        $header.toggleClass("nav-toggle");
+      });
+
+      // Close menu when clicking a nav link on mobile
+      $header.find("nav a").on("click", function () {
+        if ($window.width() < 992) {
+          $header.removeClass("nav-toggle");
+          $toggleBtn.attr("aria-expanded", "false");
+        }
+      });
+
+      // ===== Back to top =====
+      const $backToTop = $(".back-to-top");
+      if ($backToTop.length) {
+        $window.on("scroll", function () {
+          $backToTop.stop(true, true).fadeToggle($window.scrollTop() > 100, "slow");
+        });
+
+        $backToTop.on("click", function (e) {
+          e.preventDefault();
+          $("html, body").stop(true).animate({ scrollTop: 0 }, 1500, "easeInOutExpo");
+        });
+      }
+
+      // ===== Header style change =====
+      function updateHeaderStyle() {
+        if ($window.scrollTop() > 35) {
+          $header.css({
+            background: "#002e5f",
+            boxShadow: "0 .2rem .5rem rgba(0,0,0,.4)"
+          });
+        } else {
+          $header.css({ background: "none", boxShadow: "none" });
+        }
+      }
+
+      $window.on("load scroll", updateHeaderStyle);
+      updateHeaderStyle();
+
+      // ===== Counter (only if your careers page uses .counter) =====
+      const counters = document.querySelectorAll(".counter");
+      const speed = 120;
+
+      counters.forEach((counter) => {
+        const target = Number(counter.getAttribute("data-target")) || 0;
+        let current = Number(counter.innerText) || 0;
+
+        const step = () => {
+          if (current < target) {
+            const inc = Math.max(1, (target - current) / speed);
+            current = Math.min(target, current + inc);
+            counter.innerText = current;
+            requestAnimationFrame(step);
+          } else {
+            counter.innerText = target;
+          }
+        };
+
+        step();
+      });
+    });
+  </script>
 
 </body>
 </html>
