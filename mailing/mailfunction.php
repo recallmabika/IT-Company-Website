@@ -48,5 +48,3 @@ function mailfunction($mail_reciever_email, $mail_reciever_name, $mail_msg, $att
         return true;
     }
 }
-
-?>
