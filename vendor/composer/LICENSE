@@ -1,21 +1,92 @@
+<?php
 
-Copyright (c) Nils Adermann, Jordi Boggiano
+/**
+ * PHPMailer Integration Module
+ * * This script is distributed under the MIT License.
+ * Portions Copyright (c) Nils Adermann, Jordi Boggiano (Composer)
+ * Portions Copyright (c) PHPMailer Authors
+ */
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is furnished
-to do so, subject to the following conditions:
+declare(strict_types=1);
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+// Ensure dependencies are managed via Composer
+require_once __DIR__ . '/vendor/autoload.php';
 
+// It is highly recommended to move these to an .env file or a protected config array
+require_once __DIR__ . '/mailingvariables.php';
+
+/**
+ * mailfunction
+ *
+ * An improved wrapper for PHPMailer that includes strict typing,
+ * better error logging, and dynamic attachment handling.
+ *
+ * @param string $receiverEmail  Recipient's email address.
+ * @param string $receiverName   Recipient's display name.
+ * @param string $messageBody    The HTML content of the email.
+ * @param string|null $filePath  Optional absolute path to an attachment.
+ * @param string $subject        The email subject line.
+ * @return bool                  True if sent successfully, false otherwise.
+ */
+function mailfunction(
+    string $receiverEmail,
+    string $receiverName,
+    string $messageBody,
+    ?string $filePath = null,
+    string $subject = 'Someone Contacted You!'
+): bool {
+    
+    // Initialize PHPMailer with Exception support enabled
+    $mail = new PHPMailer(true);
+
+    try {
+        // --- Server Configuration ---
+        // $mail->SMTPDebug = SMTP::DEBUG_SERVER; // Enable for troubleshooting
+        $mail->isSMTP();
+        $mail->Host       = (string)($GLOBALS['mail_host'] ?? '');
+        $mail->SMTPAuth   = true;
+        $mail->Username   = (string)($GLOBALS['mail_sender_email'] ?? '');
+        $mail->Password   = (string)($GLOBALS['mail_sender_password'] ?? '');
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; 
+        $mail->Port       = (int)($GLOBALS['mail_port'] ?? 587);
+        $mail->CharSet    = PHPMailer::CHARSET_UTF8;
+
+        // --- Sender & Recipient ---
+        $mail->setFrom(
+            (string)$GLOBALS['mail_sender_email'], 
+            (string)$GLOBALS['mail_sender_name']
+        );
+        $mail->addAddress($receiverEmail, $receiverName);
+
+        // --- Attachment Handling ---
+        if ($filePath !== null && file_exists($filePath)) {
+            $mail->addAttachment($filePath);
+        }
+
+        // --- Content Logic ---
+        $mail->isHTML(true);
+        $mail->Subject = $subject;
+        
+        // Use msgHTML to auto-generate plain-text and handle inline images
+        $mail->msgHTML($messageBody);
+
+        // Robust AltBody for non-HTML clients
+        $mail->AltBody = strip_tags(str_replace(['<br>', '<br/>', '</p>'], "\n", $messageBody));
+
+        // Final delivery
+        return $mail->send();
+
+    } catch (Exception $e) {
+        // Log the error for the administrator
+        error_log("PHPMailer System Error: " . $e->getMessage());
+        return false;
+    } catch (\Throwable $e) {
+        // Catch any other unexpected PHP errors
+        error_log("Critical Mailing Error: " . $e->getMessage());
+        return false;
+    }
+}
